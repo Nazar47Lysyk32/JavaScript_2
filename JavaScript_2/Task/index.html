@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Інтерактивні завдання</title>
+</head>
+<body>
+    <h1>Виберіть завдання</h1>
+    <button onclick="determineAgeGroup()">Визначити вікову групу</button>
+    <button onclick="showSpecialSymbol()">Показати спецсимвол</button>
+    <button onclick="checkLeapYear()">Перевірити високосний рік</button>
+    <button onclick="determineIfPalindrome()">Перевірити на паліндром</button>
+    <button onclick="currencyConversion()">Конвертація валют</button>
+    <button onclick="calculateDiscount()">Розрахунок знижки</button>
+    <button onclick="calculateCircleFit()">Чи поміститься коло в квадрат?</button>
+    <button onclick="conductQuiz()">Провести вікторину</button>
+    <button onclick="showNextDate()">Показати наступну дату</button>
+
+    <script>
+        function determineAgeGroup() {
+            const age = prompt("Введіть свій вік:");
+            if (age <= 12) {
+                alert("Дитина");
+            } else if (age <= 18) {
+                alert("Підліток");
+            } else if (age <= 60) {
+                alert("Дорослий");
+            } else {
+                alert("Пенсіонер");
+            }
+        }
+
+        function showSpecialSymbol() {
+            const number = prompt("Введіть число від 0 до 9:");
+            switch (number) {
+                case '1': alert("!"); break;
+                case '2': alert("@"); break;
+                case '3': alert("#"); break;
+                case '4': alert("$"); break;
+                case '5': alert("%"); break;
+                case '6': alert("^"); break;
+                case '7': alert("&"); break;
+                case '8': alert("*"); break;
+                case '9': alert("("); break;
+                case '0': alert(")"); break;
+                default: alert("Неправильне число!");
+            }
+        }
+
+        function checkLeapYear() {
+            const year = prompt("Введіть рік:");
+            const isLeap = (year % 400 === 0) || (year % 100 !== 0 && year % 4 === 0);
+            alert(isLeap ? "Рік високосний" : "Рік не високосний");
+        }
+
+        function determineIfPalindrome() {
+            const number = prompt("Введіть п'ятизначне число:");
+            if (number.length === 5 && number[0] === number[4] && number[1] === number[3]) {
+                alert("Число є паліндромом");
+            } else {
+                alert("Число не є паліндромом");
+            }
+        }
+
+        function currencyConversion() {
+            const amount = parseFloat(prompt("Введіть суму в USD:"));
+            const currency = prompt("Введіть валюту для конвертації (EUR, UAN, AZN):");
+            let result = 0;
+            switch (currency.toUpperCase()) {
+                case 'EUR':
+                    result = amount * 0.93;
+                    break;
+                case 'UAN':
+                    result = amount * 28;
+                    break;
+                case 'AZN':
+                    result = amount * 1.7;
+                    break;
+                default:
+                    alert("Невідома валюта");
+                    return;
+            }
+            alert(`Ви отримаєте ${result.toFixed(2)} ${currency}`);
+        }
+
+        function calculateDiscount() {
+            const purchaseAmount = parseFloat(prompt("Введіть суму покупки:"));
+            let discount = 0;
+            if (purchaseAmount >= 500) {
+                discount = purchaseAmount * 0.07;
+            } else if (purchaseAmount >= 300) {
+                discount = purchaseAmount * 0.05;
+            } else if (purchaseAmount >= 200) {
+                discount = purchaseAmount * 0.03;
+            }
+            alert(`Сума до сплати зі знижкою: ${(purchaseAmount - discount).toFixed(2)}`);
+        }
+
+        function calculateCircleFit() {
+            const circleLength = parseFloat(prompt("Введіть довжину кола:"));
+            const squarePerimeter = parseFloat(prompt("Введіть периметр квадрата:"));
+            const circleDiameter = circleLength / Math.PI;
+            const squareSide = squarePerimeter / 4;
+            if (circleDiameter <= squareSide) {
+                alert("Коло може поміститися в квадрат");
+            } else {
+                alert("Коло не може поміститися в квадрат");
+            }
+        }
+
+        function conductQuiz() {
+            let score = 0;
+            const question1 = prompt("Скільки кольорів у веселці? A: 7, B: 8, C: 9", "A, B, C");
+            if (question1.toUpperCase() === "A") score += 2;
+
+            const question2 = prompt("Яка найвища гора у світі? A: Еверест, B: К2, C: Монблан", "A, B, C");
+            if (question2.toUpperCase() === "A") score += 2;
+
+            const question3 = prompt("Скільки континентів на Землі? A: 5, B: 6, C: 7", "A, B, C");
+            if (question3.toUpperCase() === "C") score += 2;
+
+            alert(`Ваш результат: ${score} балів`);
+        }
+
+        function showNextDate() {
+            const day = parseInt(prompt("Введіть день:"));
+            const month = parseInt(prompt("Введіть місяць:"));
+            const year = parseInt(prompt("Введіть рік:"));
+            let newDay = day + 1;
+            let newMonth = month;
+            let newYear = year;
+
+            const daysInMonth = new Date(year, month, 0).getDate();
+
+            if (newDay > daysInMonth) {
+                newDay = 1;
+                newMonth++;
+            }
+            if (newMonth > 12) {
+                newMonth = 1;
+                newYear++;
+            }
+
+            alert(`Наступна дата: ${newDay}.${newMonth}.${newYear}`);
+        }
+    </script>
+</body>
+</html>
